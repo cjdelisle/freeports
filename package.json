@@ -1,0 +1,28 @@
+{
+  "name": "freeports",
+  "version": "0.0.0",
+  "description": "Find out which UDP ports are not blocked",
+  "scripts": {
+    "test": "echo 'no tests'"
+  },
+  "bin": {
+      "freeports" : "./freeports.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cjdelisle/freeports.git"
+  },
+  "keywords": [
+    "port",
+    "firewall",
+    "wifi",
+    "hotel",
+    "blocked"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cjdelisle/freeports/issues"
+  },
+  "homepage": "https://github.com/cjdelisle/freeports#readme"
+}
