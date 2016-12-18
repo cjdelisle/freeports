@@ -2,7 +2,7 @@ const UDP = require('dgram');
 const MESSAGE = new Buffer('FREEPORT');
 
 const usage = () => {
-    console.log("Usage: freeports <ip address>      # scan using <ip address> freeports server");
+    console.log("Usage: freeports <ip address>  # scan with <ip address> server");
     console.log("In order to run your own freeports server, see freeports-srv");
 }
 
@@ -17,18 +17,19 @@ const main = (argv) => {
         return;
     }
     const client = UDP.createSocket('udp4');
+    client.on('message', (msg, rinfo) => {
+        if (msg.toString('utf8') !== 'PORTFREE') { return; }
+        console.log('Free Port: ' + rinfo.port);
+    })
     let port = 1;
     console.log('Scanning...');
     setInterval(() => {
         if (!(port % 50)) {
             console.log("Port " + port);
         }
-        client.send(message, 0, message.length, port++, host, (err, bytes) => {
+        client.send(MESSAGE, 0, MESSAGE.length, port++, host, (err, bytes) => {
           if (err) { console.log(err); }
         });
-        client.on('message', (msg, rinfo) => {
-            console.log(msg);
-            console.log(rinfo);
-        })
-    }, 50);
+    }, 1000);
 };
+main(process.argv);
